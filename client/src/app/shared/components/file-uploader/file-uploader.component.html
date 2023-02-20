@@ -1,0 +1,78 @@
+<div mat-dialog-content class="container">
+	<mat-toolbar class="dialog-toolbar">
+		<h1>Import</h1>
+		<button mat-dialog-close mat-icon-button>
+			<mat-icon aria-label="close">close</mat-icon>
+		</button>
+	</mat-toolbar>
+
+	<div class="dialog-content">
+
+		<ng-container *ngIf="isImportMode; else upload">
+			<div *ngIf="isAllErrorUploads" class="retry-all">
+				<div class="row">	
+					<div class="description">						
+						<mat-icon class="error-icon">error</mat-icon>
+						<span>Upload Failed</span>
+					</div>	
+					<div class="actions">
+						<button mat-button (click)="retryUpload()">RETRY</button>
+						<button mat-icon-button (click)="isAllErrorUploads = false">
+							<mat-icon aria-label="close">close</mat-icon>
+						</button>
+					</div>
+				</div>
+			</div>
+
+			<div *ngFor="let progressInfo of progressInfos; let i = index" class="progress-info">
+				<div class="row">
+					<div class="description">						
+						<span class="file-name">{{ progressInfo.fileName }}</span>					
+						<span class="file-size">{{ progressInfo.fileSize | formatBytes }}</span>
+						<span class="file-value" [ngClass]="{error: progressInfo.isError}">{{ progressInfo.value }}%</span>
+
+						<mat-progress-bar class="progress-bar" 
+										[ngClass]="{'progress-error': progressInfo.isError}"
+										mode="determinate" 
+										value="{{ !progressInfo.isError ? progressInfo.value : 100 }}">
+						</mat-progress-bar>
+
+						<div *ngIf="progressInfo.isError">
+							<span class="error">Error uploading file. <a routerLink="" (click)="retryUpload( i )">Try again?</a></span>
+						</div>
+					</div>
+					<div class="actions">						
+						<button *ngIf="isCancelUploadVisible( i )" mat-icon-button (click)="cancelUpload( i )" >
+							<mat-icon>close</mat-icon>
+						</button>
+					</div>
+				</div>
+			</div>
+		</ng-container>
+
+		<ng-template #upload>				
+			<div *ngIf="files.length" class="import-section">
+				<div class="row">
+					<span>{{ files.length }} files selected</span>
+					<button mat-raised-button class="btn" (click)="import()">Import</button>				
+				</div>
+				<mat-divider class="divider"></mat-divider>
+			</div>
+
+			<div class="files-browse-section" appDragAndDrop (filesDropped)="addFile($event)">
+				<div class="upload-items">						
+					<span class="row item">
+						<mat-icon>cloud_upload</mat-icon> Drag & drop your assets here
+					</span>
+					
+					<span class="row item">or</span>
+					<span class="row item">
+						<button mat-raised-button class="btn" (click)="browserFile.click()">Browse</button>						
+					</span>
+				</div>	
+				<input #browserFile type="file" name="file-upload" (change)="addFile($event)" multiple>			
+			</div>
+		</ng-template>
+
+	</div>
+</div>

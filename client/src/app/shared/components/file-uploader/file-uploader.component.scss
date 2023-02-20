@@ -1,0 +1,154 @@
+@import '../../../../assets/variables';
+
+.container{
+	width: $default-width;	
+
+	.dialog-toolbar{
+		width: 100%;
+		background: $toolbar-color;
+
+		h1{
+			width: $toolbar-header-width;
+		}
+	}
+
+	.dialog-content{
+		padding: 20px 20px 20px 25px;
+		background: $dialog-color;
+
+		.retry-all{
+			background: white;
+			border-radius: 4px;
+			color: black;
+			border-left: 5px solid $error-color;
+			margin-bottom: 20px;
+			padding: 3px;
+
+			.description,
+			.actions{
+				display: inherit;
+				align-items: center;
+
+			}
+
+			.description{
+				float: left;
+				width: 90%;
+
+				.error-icon{
+					margin: 0px 12px;
+					color: $error-color;
+				}
+			}
+
+			.actions{
+				float: right;
+				width: 35%;
+			}
+		}
+
+		.progress-info{
+			.row{
+				margin: 15px 0px;
+
+				.description{
+					width: 90%;
+
+					.file{
+						&-name{							
+							display: flex;
+							width: 100%;
+							margin-bottom: 1px;
+						}
+
+						&-size{
+							float: left;	
+						}
+
+						&-value{
+							float: right;
+						}
+
+						&-size,
+						&-value{
+							margin-bottom: 5px;
+						}
+					}
+					
+					.progress-bar{
+						margin-bottom: 5px;
+					}
+
+				
+					.error,
+					.error > a{
+						color: $error-color;
+					}					
+
+				}
+
+				.actions{
+					width: 10%;
+					display: flex;
+					align-items: center;
+
+					button{
+						float: right;
+					}
+				}					
+			}
+		}
+
+		.import-section{
+			margin-top: 5px;
+
+			span{
+				width: 426px;
+				display: inline-flex;
+				align-items: center;
+				text-align: left;
+			}
+
+			.divider{
+				margin: 20px -16px 10px -16px;
+			}
+		}
+
+		.files-browse-section{
+			border: 1px dashed white;
+			border-radius: 10px;
+			height: 160px;
+			position: relative;
+			font-size: 15px;
+			background: #333333;
+
+			.upload-items{
+				display: block;
+				width: 100%;
+				position: absolute;
+				top: 50%;
+				transform: translate(0,-50%);
+
+				.item{
+					justify-content: center;
+					margin: 5px;
+
+					.mat-icon{
+						margin-right: 5px;
+						font-size: 20px;
+						height: 20px;
+					}
+				}
+			}
+		}
+	}
+
+	input[type="file"]{
+		display: none;
+	}
+
+	.btn {
+		background: $btn-color;
+		color: black;
+	}
+}

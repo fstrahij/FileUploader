@@ -44,3 +44,8 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# client server files
+/client/.angular
+/client/node_modules
+/server/node_modules

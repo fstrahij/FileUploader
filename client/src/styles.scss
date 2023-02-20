@@ -1,0 +1,32 @@
+/* You can add global styles to this file, and also import other style files */
+@import './assets/variables';
+
+html, body { height: 100%; }
+body { margin: 0; font-family: $default-font-family }
+
+.mat-dialog-container,
+.mat-dialog-content{
+	padding: 0!important;
+	margin: 0!important;
+}
+
+.mat-button-focus-overlay{
+	background: transparent;
+}
+
+.mat-progress-bar-fill::after{
+	background: $btn-color;
+}
+
+.mat-progress-bar-buffer{
+	background: $pb-buffer-color;
+}
+
+.progress-error .mat-progress-bar-fill::after{							
+	background: $error-color !important;	
+}
+
+.row{
+	display: flex;
+	width: 100%;
+}

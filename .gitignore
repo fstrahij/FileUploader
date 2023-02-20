@@ -48,4 +48,5 @@ Thumbs.db
 # client server files
 /client/.angular
 /client/node_modules
+/server/uploads/*
 /server/node_modules

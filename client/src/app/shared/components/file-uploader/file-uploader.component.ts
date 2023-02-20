@@ -49,22 +49,19 @@ export class FileUploaderComponent implements OnInit, OnDestroy {
     console.log('Importing files done');
   }
 
-  isCancelUploadVisible(index: number): boolean{
-    return this.progressInfos[ index ].value < 100;
-  }
-
   // method retry upload all files or one at index 
   retryUpload(index?: number){
     (index === null || index === undefined) ? this.import() : this.upload(index, this.files[index]);
   }
 
   cancelUpload(index: number){
-    if (!this.isCancelUploadVisible( index )) { return; }
+    const info =  this.progressInfos[ index ];
+    if (info.value === 100 || info.isError === true) { return; }
 
     console.log(`${this.progressInfos[ index ].fileName} cancel uploading`);
 
     this.cancelUploads$[ index ].next(null);
-    this.progressInfos[ index ].isError = true;
+    info.isError = true;
   }
 
   private upload(index: number, file: File){
